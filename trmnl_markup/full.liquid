@@ -1,73 +1,102 @@
 <style>
-  .markdown,
-  .content,
-  .layout,
-  .columns,
-  .column {
+  .menu-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  .lunch-title {
-    margin: 0 !important;
-    line-height: 1.05;
+  .menu-title {
+    margin: 0;
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+
+  .title-spacer {
+    height: 8px;
+  }
+
+  .menu-sections {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 6px;
   }
 
   .section-block {
-    margin: 0 0 6px 0 !important;
-    padding: 0 !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .section-name {
+    margin: 0;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
 
   .section-items {
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.1;
+    margin: 0;
+    font-size: 36px;
+    line-height: 1.06;
+    letter-spacing: -0.01em;
   }
 
-  .error-block {
-    margin: 0 !important;
-    padding: 0 !important;
+  .note-line {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 600;
+  }
+
+  .error-title {
+    margin: 0 0 6px 0;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .error-body {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.08;
   }
 </style>
 
-<div class="markdown">
+<div class="menu-page">
   {% if status == "ok" %}
-    <div class="lunch-title">
-      <span class="value">St. Mark's Lunch - {{ lunch.date_display }}</span>
-    </div>
+    <div class="menu-title">St. Mark's Lunch - {{ lunch.date_display }}</div>
+    <div class="title-spacer"></div>
 
-    <div style="height: 4px;"></div>
+    <div class="menu-sections">
+      {% if lunch.note %}
+        <div class="note-line">{{ lunch.note }}</div>
+      {% endif %}
 
-    {% if lunch.note %}
-      <div class="section-block">
-        <span class="label">{{ lunch.note }}</span>
-      </div>
-    {% endif %}
-
-    {% if lunch.stations and lunch.stations.size > 0 %}
-      {% for station in lunch.stations %}
-        <div class="section-block">
-          <span class="label label--underline">{{ station.name }}</span>
-          <div class="section-items">
-            {{ station.items_joined | truncate: 120 }}
+      {% if lunch.stations and lunch.stations.size > 0 %}
+        {% for station in lunch.stations %}
+          <div class="section-block">
+            <div class="section-name">{{ station.name }}</div>
+            <div class="section-items">{{ station.items_joined | truncate: 120 }}</div>
           </div>
+        {% endfor %}
+      {% else %}
+        <div class="section-block">
+          <ul style="margin: 0; padding-left: 22px;">
+            {% for item in lunch.items limit: 12 %}
+              <li class="section-items">{{ item | truncate: 50 }}</li>
+            {% endfor %}
+          </ul>
         </div>
-      {% endfor %}
-    {% else %}
-      <div class="section-block">
-        <ul style="margin: 0; padding-left: 16px;">
-          {% for item in lunch.items limit: 12 %}
-            <li>{{ item | truncate: 50 }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   {% else %}
-    <div class="error-block">
-      <span class="label">Menu fetch failed</span>
-    </div>
-    <div class="error-block">
-      <span class="content">{{ error | truncate: 200 }}</span>
-    </div>
+    <div class="error-title">Menu fetch failed</div>
+    <div class="error-body">{{ error | truncate: 200 }}</div>
   {% endif %}
 </div>
