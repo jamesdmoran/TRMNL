@@ -1,0 +1,35 @@
+name: Update TRMNL - Next Lunch
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Runs daily. Cron is UTC.
+    # 12:15 UTC is 6:15am Central (standard time), 7:15am Central (daylight time).
+    - cron: "15 12 * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Playwright (Chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: Fetch menu and push to TRMNL
+        run: npm run update
+        env:
+          TRMNL_WEBHOOK_URL: ${{ secrets.TRMNL_WEBHOOK_URL }}
+          MENU_URL: "https://www.sagedining.com/sites/st.marksschooloftexas/menu"
+          TIMEZONE: "America/Chicago"
+          # MEAL_REGEX: "\\blunch\\b"

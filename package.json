@@ -1,0 +1,11 @@
+{
+  "name": "trmnl-sage-lunch",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "update": "node scripts/push_next_lunch.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.41.0"
+  }
+}
