@@ -1,50 +1,73 @@
-<div class="layout" style="padding-top: 0; padding-bottom: 0;">
-  <div class="columns" style="padding-top: 0; padding-bottom: 0;">
-    <div class="column" style="padding-top: 0; padding-bottom: 0;">
-      <div class="markdown" style="padding-top: 0; padding-bottom: 0; margin-top: 0; margin-bottom: 0;">
-        {% if status == "ok" %}
-          <div class="content content--center" style="margin-top: 0; margin-bottom: 0;">
-            <span class="value">St. Mark's Lunch - {{ lunch.date_display }}</span>
-          </div>
+<style>
+  .markdown,
+  .content,
+  .layout,
+  .columns,
+  .column {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 
-          {% if lunch.note %}
-            <div class="content content--center">
-              <span class="label">{{ lunch.note }}</span>
-            </div>
-          {% endif %}
+  .lunch-title {
+    margin: 0 !important;
+    line-height: 1.05;
+  }
 
-          <div style="height: 6px;"></div>
+  .section-block {
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+  }
 
-          {% if lunch.stations and lunch.stations.size > 0 %}
-            <div class="content" style="margin-bottom: 0;">
-              {% for station in lunch.stations %}
-                <div style="margin-bottom: 8px;">
-                  <span class="label label--underline">{{ station.name }}</span>
-                  <div class="content">
-                    {{ station.items_joined | truncate: 120 }}
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          {% else %}
-            <div class="content" style="margin-bottom: 0;">
-              <ul>
-                {% for item in lunch.items limit: 12 %}
-                  <li>{{ item | truncate: 50 }}</li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
+  .section-items {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.1;
+  }
 
-        {% else %}
-          <div class="content content--center" style="margin-bottom: 0;">
-            <span class="label">Menu fetch failed</span>
-          </div>
-          <div class="content" style="margin-bottom: 0;">
-            <span class="content">{{ error | truncate: 200 }}</span>
-          </div>
-        {% endif %}
-      </div>
+  .error-block {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+</style>
+
+<div class="markdown">
+  {% if status == "ok" %}
+    <div class="lunch-title">
+      <span class="value">St. Mark's Lunch - {{ lunch.date_display }}</span>
     </div>
-  </div>
+
+    <div style="height: 4px;"></div>
+
+    {% if lunch.note %}
+      <div class="section-block">
+        <span class="label">{{ lunch.note }}</span>
+      </div>
+    {% endif %}
+
+    {% if lunch.stations and lunch.stations.size > 0 %}
+      {% for station in lunch.stations %}
+        <div class="section-block">
+          <span class="label label--underline">{{ station.name }}</span>
+          <div class="section-items">
+            {{ station.items_joined | truncate: 120 }}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="section-block">
+        <ul style="margin: 0; padding-left: 16px;">
+          {% for item in lunch.items limit: 12 %}
+            <li>{{ item | truncate: 50 }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% else %}
+    <div class="error-block">
+      <span class="label">Menu fetch failed</span>
+    </div>
+    <div class="error-block">
+      <span class="content">{{ error | truncate: 200 }}</span>
+    </div>
+  {% endif %}
 </div>
