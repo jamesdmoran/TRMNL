@@ -5,14 +5,16 @@
     flex-direction: column;
     margin: 0 !important;
     padding: 0 !important;
+    color: #111;
+    font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   }
 
   .menu-title {
     margin: 0;
     font-size: 28px;
-    font-weight: 700;
-    line-height: 1.06;
-    letter-spacing: -0.03em;
+    font-weight: 650;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 
   .title-spacer {
@@ -23,8 +25,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 4px;
+    justify-content: space-evenly;
+    gap: 6px;
   }
 
   .section-block {
@@ -34,24 +36,30 @@
 
   .section-name {
     margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.02em;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.85;
   }
 
   .section-items {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.15;
+    font-size: 21px;
+    line-height: 1.04;
+    font-weight: 500;
     letter-spacing: -0.01em;
   }
 
   .note-line {
     margin: 0;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.1;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.8;
   }
 
   .error-title {
@@ -87,7 +95,7 @@
         {% endfor %}
       {% else %}
         <div class="section-block">
-          <ul style="margin: 0; padding-left: 22px;">
+          <ul style="margin: 0; padding-left: 18px;">
             {% for item in lunch.items limit: 12 %}
               <li class="section-items">{{ item | truncate: 50 }}</li>
             {% endfor %}
