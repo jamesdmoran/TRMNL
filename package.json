@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "update": "node scripts/push_next_lunch.mjs"
+    "update": "node scripts/push_next_lunch.mjs",
+    "update:dry": "DRY_RUN=true node scripts/push_next_lunch.mjs",
+    "check": "node --check scripts/push_next_lunch.mjs"
   },
   "dependencies": {
     "playwright": "^1.41.0"

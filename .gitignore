@@ -1,2 +1,9 @@
 .DS_Store
 node_modules/
+.env
+.env.*
+playwright/.cache/
+.playwright/
+debug/
+*.dump.json
+tmp/

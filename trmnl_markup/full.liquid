@@ -1,0 +1,59 @@
+<div class="layout">
+  <div class="columns">
+    <div class="column">
+      <div class="markdown">
+        <span class="title">Next Lunch</span>
+
+        {% if status == "ok" %}
+          <div class="content content--center">
+            <span class="value value--large">{{ lunch.date_display }}</span>
+          </div>
+
+          {% if lunch.note %}
+            <div class="content content--center">
+              <span class="label">{{ lunch.note }}</span>
+            </div>
+          {% endif %}
+
+          {% if lunch.stations and lunch.stations.size > 0 %}
+            <div class="content">
+              {% for station in lunch.stations %}
+                <div style="margin-bottom: 8px;">
+                  <span class="label label--underline">{{ station.name }}</span>
+                  <div class="content">
+                    {{ station.items_joined | truncate: 120 }}
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="content">
+              <ul>
+                {% for item in lunch.items limit: 12 %}
+                  <li>{{ item | truncate: 50 }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          <div class="content content--center">
+            <span class="label">Updated {{ updated_at_local }}</span>
+          </div>
+        {% else %}
+          <div class="content content--center">
+            <span class="label">Menu fetch failed</span>
+          </div>
+          <div class="content">
+            <span class="content">{{ error | truncate: 200 }}</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="title_bar">
+  <img class="image" src="https://trmnl.com/images/plugins/trmnl--render.svg" />
+  <span class="title">St. Mark's</span>
+  <span class="instance">Lunch</span>
+</div>
