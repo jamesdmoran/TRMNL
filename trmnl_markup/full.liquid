@@ -4,7 +4,7 @@
       <div class="markdown">
         {% if status == "ok" %}
           <div class="content content--center">
-            <span class="value">{{ lunch.date_display }}</span>
+            <span class="value">St. Mark's Lunch - {{ lunch.date_display }}</span>
           </div>
 
           {% if lunch.note %}
@@ -12,6 +12,8 @@
               <span class="label">{{ lunch.note }}</span>
             </div>
           {% endif %}
+
+          <div style="height: 8px;"></div>
 
           {% if lunch.stations and lunch.stations.size > 0 %}
             <div class="content">
@@ -34,9 +36,6 @@
             </div>
           {% endif %}
 
-          <div class="content content--center">
-            <span class="label">Updated {{ updated_at_local }}</span>
-          </div>
         {% else %}
           <div class="content content--center">
             <span class="label">Menu fetch failed</span>
@@ -48,9 +47,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="title_bar">
-  <img class="image" src="https://trmnl.com/images/plugins/trmnl--render.svg" />
-  <span class="title">St. Mark's Lunch</span>
 </div>
