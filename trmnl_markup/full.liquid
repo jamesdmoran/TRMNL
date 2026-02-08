@@ -2,11 +2,9 @@
   <div class="columns">
     <div class="column">
       <div class="markdown">
-        <span class="title">Next Lunch</span>
-
         {% if status == "ok" %}
           <div class="content content--center">
-            <span class="value value--large">{{ lunch.date_display }}</span>
+            <span class="value">{{ lunch.date_display }}</span>
           </div>
 
           {% if lunch.note %}
@@ -54,6 +52,5 @@
 
 <div class="title_bar">
   <img class="image" src="https://trmnl.com/images/plugins/trmnl--render.svg" />
-  <span class="title">St. Mark's</span>
-  <span class="instance">Lunch</span>
+  <span class="title">St. Mark's Lunch</span>
 </div>
