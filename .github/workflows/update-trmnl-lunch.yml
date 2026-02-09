@@ -3,9 +3,9 @@ name: Update TRMNL - Next Lunch
 on:
   workflow_dispatch: {}
   schedule:
-    # Runs daily at both 12:15 and 13:15 UTC to cover ~7:15am America/Chicago across DST.
-    - cron: "15 12 * * *"
-    - cron: "15 13 * * *"
+    # Two UTC triggers so one lands on 1:00 PM America/Chicago year-round.
+    - cron: "0 18 * * *"
+    - cron: "0 19 * * *"
 
 concurrency:
   group: trmnl-next-lunch
@@ -15,22 +15,43 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
+      - name: Gate scheduled runs to exactly 1:00 PM CT
+        id: gate
+        if: github.event_name == 'schedule'
+        run: |
+          local_hour="$(TZ=America/Chicago date +%H)"
+          local_time="$(TZ=America/Chicago date '+%Y-%m-%d %H:%M %Z')"
+          echo "CT now: ${local_time}"
+
+          if [ "${local_hour}" = "13" ]; then
+            echo "run_update=true" >> "${GITHUB_OUTPUT}"
+            echo "Proceeding with scheduled run."
+          else
+            echo "run_update=false" >> "${GITHUB_OUTPUT}"
+            echo "Skipping this schedule tick; not 1 PM CT."
+          fi
+
       - name: Checkout
+        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
         uses: actions/checkout@v4
 
       - name: Setup Node
+        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
 
       - name: Install deps
+        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
         run: npm ci
 
       - name: Install Playwright (Chromium)
+        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
         run: npx playwright install --with-deps chromium
 
       - name: Fetch menu and push to TRMNL
+        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
         run: npm run update
         env:
           TRMNL_WEBHOOK_URL: ${{ secrets.TRMNL_WEBHOOK_URL }}

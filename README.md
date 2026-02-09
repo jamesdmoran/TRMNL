@@ -69,9 +69,10 @@ This project fetches St. Mark's SAGE Dining data, computes the next lunch, and p
 
 - Manual: `workflow_dispatch`
 - Scheduled:
-  - `15 12 * * *`
-  - `15 13 * * *`
+  - `0 18 * * *`
+  - `0 19 * * *`
 - Uses concurrency group `trmnl-next-lunch` to avoid overlap.
+- Gate logic ensures only the trigger that falls at `1:00 PM America/Chicago` runs the update.
 
 ## Troubleshooting
 
