@@ -39,7 +39,7 @@ function todayIso(tz) {
 
 function resolveStartIso(tz) {
   const override = coerceIsoDate(START_DATE_ISO);
-  return override ?? todayIso(tz);
+  return override ?? addDaysIso(todayIso(tz), 1);
 }
 
 function formatDate(isoDate, tz) {

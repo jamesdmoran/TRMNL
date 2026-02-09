@@ -5,7 +5,7 @@ This project fetches St. Mark's SAGE Dining data, computes the next lunch, and p
 ## What It Does
 
 - Scrapes SAGE JSON via Playwright.
-- Finds the first lunch at or after today (`America/Chicago` by default).
+- Finds the first lunch starting tomorrow (`America/Chicago` by default).
 - Groups output by food categories (for example `Entrees`, `Soups`, `Deli`) instead of branded station names.
 - Sends `status=ok` or `status=error` payloads to TRMNL.
 - Shrinks payload automatically to stay below webhook size limits.
@@ -61,7 +61,7 @@ This project fetches St. Mark's SAGE Dining data, computes the next lunch, and p
 - `TIMEZONE` (default `America/Chicago`)
 - `MENU_URL` (default St. Mark's SAGE URL)
 - `MEAL_REGEX` (default `\\blunch\\b`)
-- `START_DATE_ISO` (for testing from a specific date, example `2026-02-09`)
+- `START_DATE_ISO` (override start date; default behavior starts from tomorrow)
 
 ## Scheduled Workflow
 
