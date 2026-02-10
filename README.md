@@ -111,10 +111,9 @@ Use plugin-specific names so both apps can live in the same repo safely:
 
 ### TRMNL Setup
 
-1. In TRMNL, create a **second Private Plugin** using the **Webhook** strategy.
-2. Save the plugin and copy its webhook URL.
-3. Open `trmnl_markup/arborism_exam_fact.liquid` and paste it into your plugin **Full** tab.
-4. Save the plugin.
+1. Open your existing arborism webhook plugin in TRMNL.
+2. Open `trmnl_markup/arborism_exam_fact.liquid` and paste it into your plugin **Full** tab.
+3. Save the plugin (same webhook URL can stay in place).
 
 ### GitHub Setup
 
