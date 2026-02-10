@@ -4,7 +4,7 @@ const MENU_URL =
   process.env.MENU_URL ??
   "https://www.sagedining.com/sites/st.marksschooloftexas/menu";
 
-const TRMNL_WEBHOOK_URL = process.env.TRMNL_WEBHOOK_URL;
+const TRMNL_WEBHOOK_URL = process.env.TRMNL_WEBHOOK_URL_LUNCH_SM;
 const TIMEZONE = process.env.TIMEZONE ?? "America/Chicago";
 const START_DATE_ISO = process.env.START_DATE_ISO ?? "";
 const MEAL_REGEX = new RegExp(process.env.MEAL_REGEX ?? "\\blunch\\b", "i");
@@ -14,7 +14,9 @@ const MAX_PAYLOAD_BYTES = 1900;
 const DEFAULT_ERROR_MAX_CHARS = 200;
 
 if (!TRMNL_WEBHOOK_URL && !DRY_RUN) {
-  console.error("Missing env TRMNL_WEBHOOK_URL (add it as a GitHub Secret or local env var).");
+  console.error(
+    "Missing webhook env TRMNL_WEBHOOK_URL_LUNCH_SM."
+  );
   process.exit(2);
 }
 

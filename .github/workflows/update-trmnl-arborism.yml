@@ -1,21 +1,21 @@
-name: Update TRMNL - Next Lunch
+name: Update TRMNL - Arborism Exam Fact
 
 on:
   workflow_dispatch: {}
   schedule:
-    # Two UTC triggers so one lands on 1:00 PM America/Chicago year-round.
-    - cron: "0 18 * * *"
-    - cron: "0 19 * * *"
+    # Two UTC triggers so one lands on 7:00 AM America/Chicago year-round.
+    - cron: "0 12 * * *"
+    - cron: "0 13 * * *"
 
 concurrency:
-  group: trmnl-next-lunch
+  group: trmnl-arborism-fact
   cancel-in-progress: false
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Gate scheduled runs to exactly 1:00 PM CT
+      - name: Gate scheduled runs to exactly 7:00 AM CT
         id: gate
         if: github.event_name == 'schedule'
         run: |
@@ -23,12 +23,12 @@ jobs:
           local_time="$(TZ=America/Chicago date '+%Y-%m-%d %H:%M %Z')"
           echo "CT now: ${local_time}"
 
-          if [ "${local_hour}" = "13" ]; then
+          if [ "${local_hour}" = "07" ]; then
             echo "run_update=true" >> "${GITHUB_OUTPUT}"
             echo "Proceeding with scheduled run."
           else
             echo "run_update=false" >> "${GITHUB_OUTPUT}"
-            echo "Skipping this schedule tick; not 1 PM CT."
+            echo "Skipping this schedule tick; not 7 AM CT."
           fi
 
       - name: Checkout
@@ -40,21 +40,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
 
-      - name: Install deps
+      - name: Push daily arborism fact to TRMNL
         if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
-        run: npm ci
-
-      - name: Install Playwright (Chromium)
-        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
-        run: npx playwright install --with-deps chromium
-
-      - name: Fetch menu and push to TRMNL
-        if: github.event_name != 'schedule' || steps.gate.outputs.run_update == 'true'
-        run: npm run update
+        run: npm run arborism:update
         env:
-          TRMNL_WEBHOOK_URL_LUNCH_SM: ${{ secrets.TRMNL_WEBHOOK_URL_LUNCH_SM }}
-          MENU_URL: "https://www.sagedining.com/sites/st.marksschooloftexas/menu"
+          TRMNL_WEBHOOK_URL_ARBORISM: ${{ secrets.TRMNL_WEBHOOK_URL_ARBORISM }}
           TIMEZONE: "America/Chicago"
-          # MEAL_REGEX: "\\blunch\\b"

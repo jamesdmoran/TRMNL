@@ -5,7 +5,10 @@
   "scripts": {
     "update": "node scripts/push_next_lunch.mjs",
     "update:dry": "DRY_RUN=true node scripts/push_next_lunch.mjs",
-    "check": "node --check scripts/push_next_lunch.mjs"
+    "check": "node --check scripts/push_next_lunch.mjs",
+    "arborism:update": "node scripts/push_arborism_fact.mjs",
+    "arborism:update:dry": "DRY_RUN=true node scripts/push_arborism_fact.mjs",
+    "arborism:check": "node --check scripts/push_arborism_fact.mjs"
   },
   "dependencies": {
     "playwright": "^1.41.0"

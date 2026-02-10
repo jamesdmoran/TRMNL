@@ -1,0 +1,126 @@
+<style>
+  .arbor-page {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    color: #122216;
+    font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .arbor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .arbor-title {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .fact-counter {
+    margin: 3px 0 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.78;
+    white-space: nowrap;
+  }
+
+  .topic-pill {
+    margin: 8px 0 0 0;
+    display: inline-block;
+    padding: 3px 9px;
+    border: 1px solid #122216;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .fact-copy {
+    margin: 9px 0 0 0;
+    font-size: 25px;
+    line-height: 1.07;
+    font-weight: 520;
+    letter-spacing: -0.012em;
+  }
+
+  .detail-label {
+    margin: 10px 0 0 0;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .detail-copy {
+    margin: 2px 0 0 0;
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 510;
+    letter-spacing: -0.005em;
+  }
+
+  .arbor-footer {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .error-title {
+    margin: 0 0 6px 0;
+    font-size: 28px;
+    line-height: 1.02;
+    font-weight: 700;
+  }
+
+  .error-body {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: 520;
+  }
+</style>
+
+<div class="arbor-page">
+  {% if status == "ok" %}
+    <div class="arbor-header">
+      <h1 class="arbor-title">{{ app_title }}</h1>
+      <div class="fact-counter">Fact {{ fact.index }} / {{ fact.total }}</div>
+    </div>
+
+    <div class="topic-pill">{{ fact.topic }}</div>
+    <p class="fact-copy">{{ fact.fact }}</p>
+
+    <div class="detail-label">Exam Tip</div>
+    <p class="detail-copy">{{ fact.exam_tip }}</p>
+
+    <div class="detail-label">Memory Hook</div>
+    <p class="detail-copy">{{ fact.memory_hook }}</p>
+
+    <div class="arbor-footer">
+      Updated {{ updated_at_local }}{% if date_key %} - {{ date_key }}{% endif %}
+    </div>
+  {% else %}
+    <h1 class="error-title">Arborism Fact Unavailable</h1>
+    <p class="error-body">{{ error | truncate: 220 }}</p>
+  {% endif %}
+</div>

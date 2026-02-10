@@ -1,0 +1,260 @@
+[
+  {
+    "topic": "Tree Biology",
+    "fact": "Most absorbing roots are in the top 12 inches of soil where oxygen is highest.",
+    "exam_tip": "Root decline is often driven by compaction and grade changes, not trunk wounds.",
+    "memory_hook": "Roots breathe first, then drink."
+  },
+  {
+    "topic": "Planting Depth",
+    "fact": "The root flare should be visible at or just above finished grade after planting.",
+    "exam_tip": "A buried flare is a common cause of decline in newly installed trees.",
+    "memory_hook": "Find the flare before you bury."
+  },
+  {
+    "topic": "Compartmentalization",
+    "fact": "Trees do not heal damaged wood; they seal it off through compartmentalization (CODIT).",
+    "exam_tip": "Modern pruning and wound care aim to support sealing, not to force healing.",
+    "memory_hook": "Trees seal, they do not heal."
+  },
+  {
+    "topic": "Pruning Cuts",
+    "fact": "A proper pruning cut is made just outside the branch bark ridge and branch collar.",
+    "exam_tip": "Flush cuts remove protective tissue and increase decay risk.",
+    "memory_hook": "Respect the ridge and collar."
+  },
+  {
+    "topic": "Pruning Method",
+    "fact": "Use the three-cut method on larger limbs to prevent bark tearing.",
+    "exam_tip": "The first undercut and second top cut remove weight before the final collar cut.",
+    "memory_hook": "Undercut, top cut, finish cut."
+  },
+  {
+    "topic": "Crown Management",
+    "fact": "Avoid removing more than about 25 percent of a mature live crown in one season.",
+    "exam_tip": "Over-pruning increases stress, sprouting, and pest susceptibility.",
+    "memory_hook": "Less than one quarter in one year."
+  },
+  {
+    "topic": "Structural Pruning",
+    "fact": "Young trees need early structural pruning to build one dominant leader and strong branch spacing.",
+    "exam_tip": "Small early cuts prevent large corrective cuts later.",
+    "memory_hook": "Small cuts now, fewer problems later."
+  },
+  {
+    "topic": "Soil Physics",
+    "fact": "Soil compaction reduces pore space, lowering oxygen and infiltration around roots.",
+    "exam_tip": "Compaction injury often appears as chronic decline rather than immediate death.",
+    "memory_hook": "Compaction chokes roots slowly."
+  },
+  {
+    "topic": "Mulching",
+    "fact": "Apply mulch about 2 to 4 inches deep and keep it away from direct trunk contact.",
+    "exam_tip": "Mulch volcanoes can hold moisture against bark and encourage decay or pests.",
+    "memory_hook": "Donut, not volcano."
+  },
+  {
+    "topic": "Topping",
+    "fact": "Topping creates large wounds and weakly attached sprouts, increasing long-term risk.",
+    "exam_tip": "Reduction cuts to suitable laterals are preferred over heading back to stubs.",
+    "memory_hook": "Top once, sprout forever."
+  },
+  {
+    "topic": "Reduction Pruning",
+    "fact": "A reduction cut should go back to a lateral branch that can assume terminal growth.",
+    "exam_tip": "A common guideline is selecting a lateral at least one-third the diameter of the removed stem.",
+    "memory_hook": "Reduce to a real lateral."
+  },
+  {
+    "topic": "Support Systems",
+    "fact": "Cabling and bracing can reduce failure potential but do not eliminate structural defects.",
+    "exam_tip": "Support systems require periodic inspection and maintenance.",
+    "memory_hook": "Support is a management plan, not a cure."
+  },
+  {
+    "topic": "Included Bark",
+    "fact": "Included bark at codominant unions prevents strong wood connection and raises failure risk.",
+    "exam_tip": "Early subordinate pruning can reduce codominant stem problems.",
+    "memory_hook": "No shared bark, no strong bond."
+  },
+  {
+    "topic": "Priority Pruning",
+    "fact": "Pruning priority commonly starts with dead, dying, diseased, and broken branches.",
+    "exam_tip": "After hazard removal, address structural and clearance objectives.",
+    "memory_hook": "Hazards first, aesthetics later."
+  },
+  {
+    "topic": "Tool Sanitation",
+    "fact": "Tool disinfection is most critical when working with known transmissible pathogens.",
+    "exam_tip": "Use sanitation between cuts where disease protocols call for it.",
+    "memory_hook": "Sanitize when transmission risk is real."
+  },
+  {
+    "topic": "Establishment Watering",
+    "fact": "Newly planted trees need deep, infrequent watering that wets the root ball and surrounding backfill.",
+    "exam_tip": "Frequent shallow watering can keep roots near the surface and increase stress.",
+    "memory_hook": "Deep and spaced beats daily sprinkles."
+  },
+  {
+    "topic": "Planting Hole",
+    "fact": "A planting hole is typically wider than the root ball but not deeper than the root ball height.",
+    "exam_tip": "Setting trees too deep is a frequent installation failure.",
+    "memory_hook": "Wide hole, correct depth."
+  },
+  {
+    "topic": "Root Defects",
+    "fact": "Circling and girdling roots can compress vascular flow as the tree increases in diameter.",
+    "exam_tip": "Inspect and correct root defects at planting when possible.",
+    "memory_hook": "Roots that wrap can strangle later."
+  },
+  {
+    "topic": "Tree Protection",
+    "fact": "Construction fencing should protect the critical root zone before equipment enters a site.",
+    "exam_tip": "Root damage during construction is often irreversible.",
+    "memory_hook": "Fence first, build second."
+  },
+  {
+    "topic": "Critical Root Zone",
+    "fact": "A common planning rule is roughly 1 foot of root protection radius per inch of trunk diameter.",
+    "exam_tip": "Site constraints may require expanded mitigation beyond the baseline rule.",
+    "memory_hook": "Each trunk inch deserves root room."
+  },
+  {
+    "topic": "Risk Assessment",
+    "fact": "Tree risk combines likelihood of failure, likelihood of impact, and consequence severity.",
+    "exam_tip": "Risk is about both defect and target, not defect alone.",
+    "memory_hook": "Failure x target x consequence."
+  },
+  {
+    "topic": "Target Management",
+    "fact": "Reducing target occupancy can lower overall risk even when defects remain.",
+    "exam_tip": "Risk mitigation options include pruning, support, exclusion, and removal.",
+    "memory_hook": "Manage the target, not just the tree."
+  },
+  {
+    "topic": "Decay Indicators",
+    "fact": "Conks and other fruiting bodies can indicate internal decay, but extent must be assessed further.",
+    "exam_tip": "External signs guide investigation; they do not quantify loss by themselves.",
+    "memory_hook": "Fungi are clues, not final numbers."
+  },
+  {
+    "topic": "Vascular Disease",
+    "fact": "Cankers kill cambium locally and can girdle stems when they expand around the circumference.",
+    "exam_tip": "Pattern and position of cankers help explain dieback symptoms.",
+    "memory_hook": "Canker rings can cut flow."
+  },
+  {
+    "topic": "Nutrition",
+    "fact": "Fertilization should follow soil or tissue evidence, not routine calendar application.",
+    "exam_tip": "Incorrect nutrient additions can worsen stress or create excess growth.",
+    "memory_hook": "Test first, feed second."
+  },
+  {
+    "topic": "Soil Chemistry",
+    "fact": "Chlorosis can result from high pH limiting micronutrient availability even when nutrients exist in soil.",
+    "exam_tip": "Diagnose cause before prescribing iron or nitrogen.",
+    "memory_hook": "Availability matters as much as amount."
+  },
+  {
+    "topic": "Integrated Pest Management",
+    "fact": "IPM uses monitoring, thresholds, and multiple tactics instead of automatic pesticide use.",
+    "exam_tip": "Correct pest ID and life stage timing are essential for effective treatment.",
+    "memory_hook": "Scout, identify, then act."
+  },
+  {
+    "topic": "Diagnosis",
+    "fact": "Abiotic stress often mimics insect or disease symptoms, especially during drought and heat events.",
+    "exam_tip": "Check site history, weather, and root conditions before concluding biotic cause.",
+    "memory_hook": "Environment can imitate pests."
+  },
+  {
+    "topic": "Pruning Timing",
+    "fact": "Dormant-season structural pruning can improve visibility of branch architecture on many deciduous trees.",
+    "exam_tip": "Timing can vary by species, local pests, and disease pressure.",
+    "memory_hook": "Structure is easiest to see when leaves are off."
+  },
+  {
+    "topic": "Oak Wilt Prevention",
+    "fact": "In oak wilt regions, avoid pruning high-risk oaks during local high transmission periods.",
+    "exam_tip": "Follow regional guidance on timing and wound management.",
+    "memory_hook": "Know local oak wilt windows."
+  },
+  {
+    "topic": "Palm Management",
+    "fact": "For most palms, removing green fronds can reduce vigor and nutrient reserves.",
+    "exam_tip": "Common practice is to remove dead or hanging fronds and true hazards only.",
+    "memory_hook": "Green fronds feed palms."
+  },
+  {
+    "topic": "Staking",
+    "fact": "Staking is for temporary stabilization, not permanent support.",
+    "exam_tip": "Remove supports once establishment allows trunk movement and taper development.",
+    "memory_hook": "Stakes are training wheels."
+  },
+  {
+    "topic": "Species Selection",
+    "fact": "Right tree, right site is one of the most effective long-term risk and maintenance controls.",
+    "exam_tip": "Match mature size and stress tolerance to site limits before planting.",
+    "memory_hook": "Selection solves future pruning."
+  },
+  {
+    "topic": "Wound Dressings",
+    "fact": "Routine wound paints are generally not recommended for pruning cuts.",
+    "exam_tip": "Most cuts seal better when left clean and properly located.",
+    "memory_hook": "Clean cut, no cosmetic coat."
+  },
+  {
+    "topic": "Lightning Protection",
+    "fact": "Lightning protection systems can reduce strike damage but do not remove all tree risk.",
+    "exam_tip": "Systems must be professionally installed and periodically inspected.",
+    "memory_hook": "Protection lowers risk, not to zero."
+  },
+  {
+    "topic": "Load Paths",
+    "fact": "Long lever arms and end-weight create higher bending moments at branch unions.",
+    "exam_tip": "Reduction pruning can shorten lever arms and reduce load.",
+    "memory_hook": "Long arm means high moment."
+  },
+  {
+    "topic": "Epicormic Growth",
+    "fact": "Epicormic shoots often indicate stress, sudden light exposure, or severe pruning response.",
+    "exam_tip": "Repeated topping commonly produces dense weakly attached sprout clusters.",
+    "memory_hook": "Stress can trigger emergency shoots."
+  },
+  {
+    "topic": "Inspection Records",
+    "fact": "Documented inspections should record defects, targets, recommendations, and follow-up intervals.",
+    "exam_tip": "Clear records support defensible risk management decisions.",
+    "memory_hook": "If it is not documented, it is hard to defend."
+  },
+  {
+    "topic": "Safety Standards",
+    "fact": "Arboricultural crews should follow applicable safety standards and local regulations for climbing and chainsaw work.",
+    "exam_tip": "Training, PPE, and clear work zones are core controls on every job.",
+    "memory_hook": "Standard work prevents standard injuries."
+  },
+  {
+    "topic": "Electrical Safety",
+    "fact": "Trees near energized conductors require qualified workers and strict approach-distance control.",
+    "exam_tip": "Line-clearance work has specialized training requirements.",
+    "memory_hook": "Power lines change the whole plan."
+  },
+  {
+    "topic": "Climbing Systems",
+    "fact": "A secure tie-in point and continuous attachment strategy reduce fall risk aloft.",
+    "exam_tip": "Inspect ropes, hardware, and anchors before each climb.",
+    "memory_hook": "Trust your tie-in, then verify it."
+  },
+  {
+    "topic": "Post-Plant Care",
+    "fact": "Establishment success depends on the first few years of water, mulch, and damage prevention.",
+    "exam_tip": "Many planting failures are maintenance failures, not nursery stock failures.",
+    "memory_hook": "Planting day is the start, not the finish."
+  },
+  {
+    "topic": "Damage Prevention",
+    "fact": "Mechanical injury from mowers and string trimmers can disrupt cambium and invite decay organisms.",
+    "exam_tip": "Mulch rings and clear maintenance zones reduce trunk strikes.",
+    "memory_hook": "Protect bark from equipment hits."
+  }
+]
