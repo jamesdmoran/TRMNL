@@ -3,9 +3,9 @@ name: Update TRMNL - Arborism Exam Fact
 on:
   workflow_dispatch: {}
   schedule:
-    # Two UTC triggers so one lands on 7:00 AM America/Chicago year-round.
-    - cron: "0 12 * * *"
-    - cron: "0 13 * * *"
+    # Two UTC triggers so one lands on 1:00 PM America/Chicago year-round.
+    - cron: "0 18 * * *"
+    - cron: "0 19 * * *"
 
 concurrency:
   group: trmnl-arborism-fact
@@ -15,7 +15,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Gate scheduled runs to DST-correct daily trigger
+      - name: Gate scheduled runs to DST-correct 1:00 PM CT trigger
         id: gate
         if: github.event_name == 'schedule'
         run: |
@@ -25,12 +25,12 @@ jobs:
           echo "CT now: ${local_time}"
           echo "Triggered by cron: ${scheduled_cron}"
 
-          if [ "${local_tz}" = "CST" ] && [ "${scheduled_cron}" = "0 13 * * *" ]; then
+          if [ "${local_tz}" = "CST" ] && [ "${scheduled_cron}" = "0 19 * * *" ]; then
             echo "run_update=true" >> "${GITHUB_OUTPUT}"
-            echo "Proceeding (CST + 13:00 UTC tick)."
-          elif [ "${local_tz}" = "CDT" ] && [ "${scheduled_cron}" = "0 12 * * *" ]; then
+            echo "Proceeding (CST + 19:00 UTC tick = 1 PM CT)."
+          elif [ "${local_tz}" = "CDT" ] && [ "${scheduled_cron}" = "0 18 * * *" ]; then
             echo "run_update=true" >> "${GITHUB_OUTPUT}"
-            echo "Proceeding (CDT + 12:00 UTC tick)."
+            echo "Proceeding (CDT + 18:00 UTC tick = 1 PM CT)."
           else
             echo "run_update=false" >> "${GITHUB_OUTPUT}"
             echo "Skipping this schedule tick."

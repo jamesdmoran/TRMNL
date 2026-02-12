@@ -144,10 +144,10 @@ Use plugin-specific names so both apps can live in the same repo safely:
 
 - Manual: `workflow_dispatch`
 - Scheduled:
-  - `0 12 * * *`
-  - `0 13 * * *`
+  - `0 18 * * *`
+  - `0 19 * * *`
 - Uses concurrency group `trmnl-arborism-fact` to avoid overlap.
-- Gate logic ensures only the trigger that falls at `7:00 AM America/Chicago` runs the update.
+- Gate logic ensures only the trigger that falls at `1:00 PM America/Chicago` runs the update.
 
 ## Troubleshooting
 
