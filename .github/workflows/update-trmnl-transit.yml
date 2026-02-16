@@ -2,8 +2,9 @@ name: Update TRMNL - Transit Delays
 
 on:
   workflow_dispatch: {}
-  schedule:
-    - cron: "*/15 * * * *"
+  # schedule is intentionally paused until TRMNL template + secret are set.
+  # schedule:
+  #   - cron: "*/15 * * * *"
 
 concurrency:
   group: trmnl-transit-delays
