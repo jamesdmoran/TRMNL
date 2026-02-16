@@ -9,9 +9,15 @@
     "arborism:update": "node scripts/push_arborism_fact.mjs",
     "arborism:update:dry": "DRY_RUN=true node scripts/push_arborism_fact.mjs",
     "arborism:check": "node --check scripts/push_arborism_fact.mjs",
+    "wta:update": "node scripts/push_wta_scores.mjs",
+    "wta:update:dry": "DRY_RUN=true node scripts/push_wta_scores.mjs",
+    "wta:check": "node --check scripts/push_wta_scores.mjs",
     "transit:delays": "node scripts/transit_delays.mjs",
     "transit:delays:watch": "node scripts/transit_delays.mjs --watch",
-    "transit:delays:check": "node --check scripts/transit_delays.mjs"
+    "transit:delays:check": "node --check scripts/transit_delays.mjs",
+    "transit:push": "node scripts/push_transit_delays.mjs",
+    "transit:push:dry": "DRY_RUN=true node scripts/push_transit_delays.mjs",
+    "transit:push:check": "node --check scripts/push_transit_delays.mjs"
   },
   "dependencies": {
     "playwright": "^1.41.0"

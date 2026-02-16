@@ -1,0 +1,201 @@
+<style>
+  .transit-page {
+    height: 100%;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #0f172a;
+    font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .transit-header {
+    border-bottom: 1px solid #0f172a;
+    padding-bottom: 5px;
+    display: grid;
+    gap: 2px;
+  }
+
+  .transit-title {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .transit-meta {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 620;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.82;
+  }
+
+  .status-line {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.1;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .sections {
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .panel {
+    min-height: 0;
+    border: 1px solid #0f172a;
+    border-radius: 8px;
+    padding: 6px 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .panel-title {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .panel-subtitle {
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.75;
+  }
+
+  .delay-item {
+    border-top: 1px solid rgba(15, 23, 42, 0.24);
+    padding-top: 4px;
+    display: grid;
+    gap: 1px;
+  }
+
+  .line-pill {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.82;
+  }
+
+  .delay-summary {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.1;
+    font-weight: 640;
+    letter-spacing: -0.01em;
+  }
+
+  .delay-reason {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 520;
+    opacity: 0.86;
+  }
+
+  .empty-line {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.15;
+    font-weight: 520;
+    opacity: 0.78;
+  }
+
+  .footer {
+    margin-top: auto;
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    opacity: 0.72;
+  }
+
+  @media (max-width: 640px) {
+    .sections {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="transit-page">
+  <header class="transit-header">
+    <h1 class="transit-title">{{ app_title }}</h1>
+    <p class="transit-meta">{{ updated_at_local }}{% if timezone_abbrev %} {{ timezone_abbrev }}{% endif %}</p>
+    {% if status == "partial" %}
+      <p class="status-line">Partial data available</p>
+    {% elsif status == "error" %}
+      <p class="status-line">Data unavailable</p>
+    {% endif %}
+  </header>
+
+  <div class="sections">
+    <section class="panel">
+      <p class="panel-title">NYC Subway</p>
+      <p class="panel-subtitle">Delays: {{ nyc.delay_count }}</p>
+
+      {% if nyc.status == "error" %}
+        <p class="empty-line">{{ nyc.error | truncate: 170 }}</p>
+      {% elsif nyc.items and nyc.items.size > 0 %}
+        {% for item in nyc.items %}
+          <article class="delay-item">
+            <p class="line-pill">{{ item.line }}</p>
+            <p class="delay-summary">{{ item.summary }}</p>
+            {% if item.reason %}
+              <p class="delay-reason">Reason: {{ item.reason }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      {% else %}
+        <p class="empty-line">No active subway delays.</p>
+      {% endif %}
+    </section>
+
+    <section class="panel">
+      <p class="panel-title">London Tube</p>
+      <p class="panel-subtitle">Delays: {{ london.delay_count }}</p>
+
+      {% if london.status == "error" %}
+        <p class="empty-line">{{ london.error | truncate: 170 }}</p>
+      {% elsif london.items and london.items.size > 0 %}
+        {% for item in london.items %}
+          <article class="delay-item">
+            <p class="line-pill">{{ item.line }} - {{ item.status }}</p>
+            {% if item.reason %}
+              <p class="delay-reason">Reason: {{ item.reason }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      {% else %}
+        <p class="empty-line">No active tube delays.</p>
+      {% endif %}
+    </section>
+  </div>
+
+  <div class="footer">
+    {% if nyc.feed_timestamp_local %}MTA feed {{ nyc.feed_timestamp_local }}{% else %}Live transit status{% endif %}
+  </div>
+</div>

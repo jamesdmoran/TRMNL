@@ -1,0 +1,30 @@
+name: Update TRMNL - Transit Delays
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "*/15 * * * *"
+
+concurrency:
+  group: trmnl-transit-delays
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Push transit delays to TRMNL
+        run: npm run transit:push
+        env:
+          TRMNL_WEBHOOK_URL_TRANSIT: ${{ secrets.TRMNL_WEBHOOK_URL_TRANSIT }}
+          TIMEZONE: "America/Chicago"
+          TRANSIT_MAX_NYC_ITEMS: "3"
+          TRANSIT_MAX_LONDON_ITEMS: "4"

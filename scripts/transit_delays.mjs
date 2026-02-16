@@ -1,3 +1,8 @@
+import { execFile } from "node:child_process";
+import path from "node:path";
+import { promisify } from "node:util";
+import { fileURLToPath } from "node:url";
+
 const DEFAULT_INTERVAL_SECONDS = 120;
 const DEFAULT_TIMEOUT_MS = Number.parseInt(process.env.FETCH_TIMEOUT_MS ?? "15000", 10);
 const MTA_ALERTS_URL =
@@ -13,6 +18,7 @@ const TUBE_DISRUPTION_RE =
 
 const HTML_TAG_RE = /<[^>]*>/g;
 const MULTISPACE_RE = /\s+/g;
+const execFileAsync = promisify(execFile);
 
 function printHelp() {
   console.log(`
@@ -305,14 +311,34 @@ async function fetchJson(url, timeoutMs) {
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    const response = await fetch(url, {
-      signal: controller.signal,
-      headers: { Accept: "application/json" },
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status} ${response.statusText}`);
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: { Accept: "application/json" },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status} ${response.statusText}`);
+      }
+      return await response.json();
+    } catch (fetchError) {
+      // Fallback for restricted runtime environments where Node fetch DNS is blocked.
+      try {
+        const { stdout } = await execFileAsync("curl", [
+          "-sS",
+          "--fail",
+          url,
+        ]);
+        return JSON.parse(stdout);
+      } catch (curlError) {
+        const fetchMessage = fetchError instanceof Error
+          ? fetchError.message
+          : String(fetchError);
+        const curlMessage = curlError instanceof Error ? curlError.message : String(curlError);
+        throw new Error(
+          `Request failed via fetch and curl at ${url}. fetch: ${truncateText(fetchMessage, 120)}; curl: ${truncateText(curlMessage, 120)}`
+        );
+      }
     }
-    return await response.json();
   } finally {
     clearTimeout(timeout);
   }
@@ -356,7 +382,7 @@ function toResultState(sourceName, settledResult) {
   };
 }
 
-async function collectSnapshot(options) {
+export async function collectSnapshot(options) {
   const [nyc, london] = await Promise.allSettled([
     getNycSubwayDelays(options),
     getLondonTubeDelays(options),
@@ -490,4 +516,11 @@ async function main() {
   await run(options);
 }
 
-await main();
+function isMainModule() {
+  if (!process.argv[1]) return false;
+  return fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+}
+
+if (isMainModule()) {
+  await main();
+}

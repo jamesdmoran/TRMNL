@@ -1,0 +1,30 @@
+name: Update TRMNL - WTA Tournament Scores
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "*/30 * * * *"
+
+concurrency:
+  group: trmnl-wta-scores
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Push WTA scores to TRMNL
+        run: npm run wta:update
+        env:
+          TRMNL_WEBHOOK_URL_WTA_SCORES: ${{ secrets.TRMNL_WEBHOOK_URL_WTA_SCORES }}
+          TIMEZONE: "America/Chicago"
+          WTA_LOOKBACK_DAYS: "1"
+          WTA_LOOKAHEAD_DAYS: "6"

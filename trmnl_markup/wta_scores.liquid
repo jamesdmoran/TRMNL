@@ -1,0 +1,219 @@
+<style>
+  .wta-page {
+    height: 100%;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #0f1318;
+    font-family: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .wta-header {
+    display: grid;
+    gap: 2px;
+    border-bottom: 1px solid #0f1318;
+    padding-bottom: 5px;
+  }
+
+  .wta-title {
+    margin: 0;
+    font-size: 27px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .wta-subtitle {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.05;
+    font-weight: 630;
+    letter-spacing: -0.01em;
+  }
+
+  .wta-meta {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.82;
+  }
+
+  .wta-columns {
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 8px;
+  }
+
+  .wta-section {
+    min-height: 0;
+    border: 1px solid #0f1318;
+    border-radius: 8px;
+    padding: 6px 7px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .section-label {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.85;
+  }
+
+  .match-block {
+    border-top: 1px solid rgba(15, 19, 24, 0.25);
+    padding-top: 4px;
+    display: grid;
+    gap: 1px;
+  }
+
+  .match-row {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .players {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.08;
+    font-weight: 640;
+    letter-spacing: -0.01em;
+  }
+
+  .score-line {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.07;
+    font-weight: 520;
+  }
+
+  .next-time {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.06;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .next-players {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.08;
+    font-weight: 540;
+    letter-spacing: -0.005em;
+  }
+
+  .empty-line {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.15;
+    font-weight: 520;
+    opacity: 0.78;
+  }
+
+  .wta-footer {
+    margin-top: auto;
+    text-align: right;
+    font-size: 12px;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .error-title {
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.03;
+    font-weight: 700;
+  }
+
+  .error-body {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.2;
+    font-weight: 520;
+  }
+
+  @media (max-width: 640px) {
+    .wta-columns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="wta-page">
+  {% if status == "ok" %}
+    <header class="wta-header">
+      <h1 class="wta-title">{{ tournament.level }} Scores</h1>
+      <p class="wta-subtitle">{{ tournament.event_name }}</p>
+      <p class="wta-meta">{{ tournament.location }}{% if tournament.status %} - {{ tournament.status }}{% endif %}</p>
+    </header>
+
+    <div class="wta-columns">
+      <section class="wta-section">
+        <p class="section-label">Current Scores</p>
+
+        {% if score_matches and score_matches.size > 0 %}
+          {% for match in score_matches %}
+            <article class="match-block">
+              <p class="match-row">
+                <span>{{ match.state }}</span>
+                <span>{% if match.round %}{{ match.round }}{% endif %}</span>
+              </p>
+              <p class="players">{{ match.players }}</p>
+              <p class="score-line">{{ match.score }}{% if match.points %} - {{ match.points }}{% endif %}</p>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="empty-line">No score lines available yet.</p>
+        {% endif %}
+      </section>
+
+      <section class="wta-section">
+        <p class="section-label">Next Matches</p>
+
+        {% if next_matches and next_matches.size > 0 %}
+          {% for match in next_matches %}
+            <article class="match-block">
+              <p class="match-row">
+                <span>{{ match.start_local }}</span>
+                <span>{% if match.round %}{{ match.round }}{% endif %}</span>
+              </p>
+              <p class="next-players">{{ match.players }}</p>
+            </article>
+          {% endfor %}
+        {% else %}
+          <p class="empty-line">No upcoming matches in this window.</p>
+        {% endif %}
+      </section>
+    </div>
+
+    <div class="wta-footer">
+      Updated {{ updated_at_local }}{% if timezone_abbrev %} {{ timezone_abbrev }}{% endif %}
+    </div>
+  {% else %}
+    <h1 class="error-title">WTA Scores Unavailable</h1>
+    <p class="error-body">{{ error | truncate: 220 }}</p>
+  {% endif %}
+</div>
