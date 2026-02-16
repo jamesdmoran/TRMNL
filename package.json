@@ -8,7 +8,10 @@
     "check": "node --check scripts/push_next_lunch.mjs",
     "arborism:update": "node scripts/push_arborism_fact.mjs",
     "arborism:update:dry": "DRY_RUN=true node scripts/push_arborism_fact.mjs",
-    "arborism:check": "node --check scripts/push_arborism_fact.mjs"
+    "arborism:check": "node --check scripts/push_arborism_fact.mjs",
+    "transit:delays": "node scripts/transit_delays.mjs",
+    "transit:delays:watch": "node scripts/transit_delays.mjs --watch",
+    "transit:delays:check": "node --check scripts/transit_delays.mjs"
   },
   "dependencies": {
     "playwright": "^1.41.0"

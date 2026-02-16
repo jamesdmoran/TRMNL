@@ -1,9 +1,10 @@
 # TRMNL Apps
 
-This repository contains two TRMNL webhook apps in one project:
+This repository contains two TRMNL webhook apps and one terminal monitoring app:
 
 1. **Next Lunch (SAGE Dining)** - fetches St. Mark's lunch data and formats it for TRMNL.
 2. **Arborism Exam Fact** - rotates one arborism study fact per day for exam prep.
+3. **Transit Delays CLI** - shows live delays and reasons for NYC Subway and London Tube.
 
 ## Repo Structure
 
@@ -21,7 +22,8 @@ This repository contains two TRMNL webhook apps in one project:
 │  └─ arborism_exam_fact.liquid
 ├─ scripts/
 │  ├─ push_next_lunch.mjs
-│  └─ push_arborism_fact.mjs
+│  ├─ push_arborism_fact.mjs
+│  └─ transit_delays.mjs
 └─ .github/
    └─ workflows/
       ├─ update-trmnl-lunch.yml
@@ -149,6 +151,40 @@ Use plugin-specific names so both apps can live in the same repo safely:
 - Uses concurrency group `trmnl-arborism-fact` to avoid overlap.
 - Gate logic ensures only the trigger that falls at `1:00 PM America/Chicago` runs the update.
 
+## App 3: Transit Delays CLI (NYC Subway + London Tube)
+
+### What It Does
+
+- Pulls live alert/status data from:
+  - MTA GTFS-RT alerts feed (NYC Subway)
+  - TfL line status endpoint (London Tube)
+- Shows only active delay/disruption entries.
+- Prints the reason text for each delay when provided by the upstream feed.
+- Supports one-shot mode and watch mode for continuous updates.
+
+### Local Run
+
+1. Validate script syntax:
+   - `npm run transit:delays:check`
+2. Run once:
+   - `npm run transit:delays`
+3. Watch mode (refreshes continuously):
+   - `npm run transit:delays:watch`
+
+### CLI Options
+
+- `--watch` keep refreshing output
+- `--interval <seconds>` refresh interval in watch mode (default `120`)
+- `--json` emit JSON output
+- `--include-planned` include planned-work subway alerts from MTA
+- `--help` show usage
+
+### Optional Env Overrides
+
+- `MTA_ALERTS_URL` (override NYC alerts endpoint)
+- `TFL_STATUS_URL` (override London status endpoint)
+- `FETCH_TIMEOUT_MS` (HTTP timeout for each request)
+
 ## Troubleshooting
 
 ### Next Lunch
@@ -173,3 +209,12 @@ Use plugin-specific names so both apps can live in the same repo safely:
   - Each fact requires `topic`, `fact`, `exam_tip`, and `memory_hook`.
 - Webhook returns non-2xx
   - Confirm `TRMNL_WEBHOOK_URL_ARBORISM` is correct and plugin is active.
+
+### Transit Delays CLI
+
+- `Error: fetch failed` or DNS errors
+  - Confirm your network can reach MTA and TfL API hosts.
+- Empty delay list
+  - This is expected when both systems are reporting no current delays.
+- Watch mode seems slow
+  - Lower interval with `--interval`, for example `--interval 60`.
